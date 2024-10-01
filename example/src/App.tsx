@@ -1,17 +1,23 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-thirdparty-logins';
+import { StyleSheet, View } from 'react-native';
+import LoginButtons from 'react-native-thirdparty-logins';
 
 export default function App() {
-  const [result, setResult] = useState<number | undefined>();
+  const handleSucess = (response: any) => {
+    console.log('Success', response);
+  };
 
-  useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const handleError = (response: any) => {
+    console.log('Error', response);
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <LoginButtons
+        onSuccess={handleSucess}
+        onError={handleError}
+        googleEnabled={true}
+        // theme="dark"
+      />
     </View>
   );
 }
@@ -21,6 +27,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20,
+    // paddingVertical: 250,
   },
   box: {
     width: 60,
