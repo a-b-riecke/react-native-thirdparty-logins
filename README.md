@@ -8,6 +8,19 @@ providing alternative ways to login
 npm install react-native-thirdparty-logins
 ```
 
+## Google api setup
+
+Local installation:
+From your project root 
+```sh
+cd android && ./gradlew signingReport.
+```
+
+Scroll to the top of output, see the fingerprints. Debug fingerprint is used in dev, release fingerprint is used for release APK.
+Set the keys up in [Google Cloud](https://peerlist.io/blog/engineering/implementing-google-signin-in-react-native#10-possible-problem-developer_error)
+
+
+
 ## Usage
 
 

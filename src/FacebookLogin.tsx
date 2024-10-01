@@ -1,7 +1,8 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
+import type { LoginProps } from './types';
 
-const GoogleLogin = (props: any) => {
+const GoogleLogin = (props: LoginProps) => {
   const theme = props.theme || 'dark';
 
   const LOGO =

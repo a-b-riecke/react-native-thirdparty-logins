@@ -1,8 +1,9 @@
 import appleAuth from '@invertase/react-native-apple-authentication';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
+import type { LoginProps } from './types';
 
-const AppleLogin = (props: any) => {
+const AppleLogin = (props: LoginProps) => {
   const theme = props.theme || 'dark';
 
   const LOGO =

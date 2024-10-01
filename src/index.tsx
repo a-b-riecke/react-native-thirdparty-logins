@@ -4,8 +4,9 @@ import appleAuth from '@invertase/react-native-apple-authentication';
 import GoogleLogin from './GoogleLogin';
 import FacebookLogin from './FacebookLogin';
 import { styles } from './styles';
+import type { LoginProps } from './types';
 
-const LoginButtons = (props: any) => {
+const LoginButtons = (props: LoginProps) => {
   return (
     <View style={styles.buttonWrapper}>
       {appleAuth.isSupported && props.iosEnabled !== false && (

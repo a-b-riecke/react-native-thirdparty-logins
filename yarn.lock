@@ -3225,6 +3225,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-google-signin/google-signin@npm:latest":
+  version: 13.1.0
+  resolution: "@react-native-google-signin/google-signin@npm:13.1.0"
+  peerDependencies:
+    expo: ">=50.0.0"
+    react: "*"
+    react-dom: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 777bb338ce1ce1b9581f1e3c67d04a1d8eb2486745868e170455b3485c26a6dcbeb202acfb949bf45817b7d7f9c8c7259342c1a0f237aa03eef2965e69b90f12
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.87":
   version: 0.74.87
   resolution: "@react-native/assets-registry@npm:0.74.87"
@@ -7230,13 +7247,6 @@ __metadata:
   dependencies:
     invariant: ^2.2.4
   checksum: 0bd35e9967b5aebb7ccdbd95d3a806fe009af4ec22f53d6856c121ff0390545b1bc15f65a943fc4707bd300c29f0eb7d66d0ddc2ecc177f22d3dbe8ae305d207
-  languageName: node
-  linkType: hard
-
-"expo-status-bar@npm:~1.12.1":
-  version: 1.12.1
-  resolution: "expo-status-bar@npm:1.12.1"
-  checksum: 82f2e9096660cdb521b920662908b93e1909c2bbe776802c314dff6e0863300d19ba4b9e093825b2bdc094f333010df0b8ed11fcb330e4c29a16c2d55da0aa96
   languageName: node
   linkType: hard
 
@@ -12595,10 +12605,9 @@ __metadata:
     "@expo/metro-runtime": ~3.2.3
     expo: ~51.0.28
     expo-auth-session: ~5.5.2
-    expo-status-bar: ~1.12.1
     react: 18.2.0
     react-dom: 18.2.0
-    react-native: 0.74.5
+    react-native: ^0.74.5
     react-native-builder-bob: ^0.30.2
     react-native-web: ~0.19.10
   languageName: unknown
@@ -12611,6 +12620,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
     "@invertase/react-native-apple-authentication": ^2.4.0
+    "@react-native-google-signin/google-signin": latest
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^5.0.0
     "@types/jest": ^29.5.5
@@ -12652,7 +12662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.74.5":
+"react-native@npm:0.74.5, react-native@npm:^0.74.5":
   version: 0.74.5
   resolution: "react-native@npm:0.74.5"
   dependencies:

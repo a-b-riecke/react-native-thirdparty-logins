@@ -183,6 +183,7 @@
     "version": "0.41.2"
   },
   "dependencies": {
-    "@invertase/react-native-apple-authentication": "^2.4.0"
+    "@invertase/react-native-apple-authentication": "^2.4.0",
+    "@react-native-google-signin/google-signin": "latest"
   }
 }

@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import LoginButtons from 'react-native-thirdparty-logins';
+import { GOOGLE_ANDROID_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from './go.config';
 
 export default function App() {
   const handleSucess = (response: any) => {
@@ -16,6 +17,8 @@ export default function App() {
         onSuccess={handleSucess}
         onError={handleError}
         googleEnabled={true}
+        googleIOSClientId={GOOGLE_IOS_CLIENT_ID}
+        googleAndroidClientId={GOOGLE_ANDROID_CLIENT_ID}
         // theme="dark"
       />
     </View>
