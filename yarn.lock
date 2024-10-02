@@ -3391,7 +3391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-google-signin/google-signin@npm:latest":
+"@react-native-google-signin/google-signin@npm:^13.1.0, @react-native-google-signin/google-signin@npm:latest":
   version: 13.1.0
   resolution: "@react-native-google-signin/google-signin@npm:13.1.0"
   peerDependencies:
@@ -12995,6 +12995,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.0
     "@expo/metro-runtime": ~3.2.3
+    "@react-native-google-signin/google-signin": ^13.1.0
     expo: ~51.0.28
     expo-auth-session: ~5.5.2
     react: 18.2.0

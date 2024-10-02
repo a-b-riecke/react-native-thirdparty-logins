@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>CLIENT_ID</key>
-    <string>269506312208-9p7obljparpik993ekegiccauf1o696m.apps.googleusercontent.com</string>
-    <key>REVERSED_CLIENT_ID</key>
-    <string>com.googleusercontent.apps.269506312208-9p7obljparpik993ekegiccauf1o696m</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
     <key>CFBundleDevelopmentRegion</key>
@@ -32,9 +28,14 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>thirdpartylogins.example</string>
+          <string>com.googleusercontent.apps.YOUR_GOOGLE_KEY</string>
         </array>
       </dict>
     </array>
+    <key>CLIENT_ID</key>
+    <string>YOUR_GOOGLE_KEY.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.YOUR_GOOGLE_KEY</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>LSRequiresIPhoneOS</key>

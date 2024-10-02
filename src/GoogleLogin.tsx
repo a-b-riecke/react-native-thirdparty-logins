@@ -29,15 +29,28 @@ const GoogleLogin = (props: LoginProps) => {
 
   GoogleSignin.configure({
     webClientId: key,
+    iosClientId: key,
     scopes: ['profile', 'email'],
   });
 
   const onGoogleButtonPress = async () => {
-    console.log('Google Login');
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    console.log(userInfo);
-    return userInfo;
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+
+      if (userInfo.type === 'success') {
+        let userObject = {
+          token: userInfo.data.idToken,
+          email: userInfo.data.user.email,
+          name: userInfo.data.user.name,
+        };
+        props.onSuccess(userObject);
+      } else {
+        props.onError('Sign-in Failed');
+      }
+    } catch (error) {
+      console.log(error);
+    }
     //   try {
     //     const appleAuthRequestResponse = await appleAuth.performRequest({
     //       requestedOperation: appleAuth.Operation.LOGIN,

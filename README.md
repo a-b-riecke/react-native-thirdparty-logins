@@ -5,7 +5,7 @@ providing alternative ways to login
 ## Installation
 
 ```sh
-npm install react-native-thirdparty-logins
+yarn add react-native-thirdparty-logins
 ```
 
 ## Google api setup
@@ -18,6 +18,26 @@ cd android && ./gradlew signingReport.
 
 Scroll to the top of output, see the fingerprints. Debug fingerprint is used in dev, release fingerprint is used for release APK.
 Set the keys up in [Google Cloud](https://peerlist.io/blog/engineering/implementing-google-signin-in-react-native#10-possible-problem-developer_error)
+
+### ios
+Add this google ios client id to plist
+```
+  <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>thirdpartylogins.example</string>
+          <string>com.googleusercontent.apps.YOUR_GOOGLE_KEY</string>
+        </array>
+      </dict>
+    </array>
+    <key>CLIENT_ID</key>
+    <string>YOUR_GOOGLE_KEY.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.YOUR_GOOGLE_KEY</string>
+```
+
 
 
 
