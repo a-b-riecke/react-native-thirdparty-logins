@@ -22,7 +22,9 @@ const GoogleLogin = (props: LoginProps) => {
           styles.buttonContainer,
         ]}
       >
-        <Text>Google Client ID is required</Text>
+        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
+          Google Client ID is required
+        </Text>
       </View>
     );
   }

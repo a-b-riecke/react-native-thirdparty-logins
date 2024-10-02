@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     minWidth: 140,
+    minHeight: 50,
   },
   logo: {
     width: 50,

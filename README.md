@@ -28,7 +28,7 @@ cd android && ./gradlew signingReport.
 Scroll to the top of output, see the fingerprints. Debug fingerprint is used in dev, release fingerprint is used for release APK.
 
 Add this to 'android/app/build.gradle
-``
+```
 dependencies {
   implementation 'com.google.android.gms:play-services-auth:20.0.0'
 }

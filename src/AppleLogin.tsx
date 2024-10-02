@@ -37,6 +37,21 @@ const AppleLogin = (props: LoginProps) => {
     }
   };
 
+  if (!appleAuth.isSupported) {
+    return (
+      <View
+        style={[
+          { backgroundColor: BGCOLOR, borderColor: TXTCOLOR },
+          styles.buttonContainer,
+        ]}
+      >
+        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
+          Sign in with apple not supported
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <TouchableOpacity onPress={onAppleButtonPress}>
       <View
