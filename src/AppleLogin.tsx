@@ -22,10 +22,13 @@ const AppleLogin = (props: LoginProps) => {
         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       });
 
-      // const { user, email, fullName, identityToken } = appleAuthRequestResponse;
-
       if (appleAuthRequestResponse.identityToken) {
-        props.onSuccess(appleAuthRequestResponse);
+        let userObject = {
+          token: appleAuthRequestResponse.identityToken,
+          email: appleAuthRequestResponse.email,
+          name: appleAuthRequestResponse.fullName,
+        };
+        props.onSuccess(userObject);
       } else {
         props.onError('Sign-in Failed');
       }
