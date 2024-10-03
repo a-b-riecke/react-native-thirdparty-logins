@@ -188,7 +188,6 @@
     "@invertase/react-native-apple-authentication": "^2.4.0",
     "@react-native-google-signin/google-signin": "latest",
     "@types/react-native": "^0.73.0",
-    "axios": "^1.7.7",
     "react-native-fbsdk-next": "^13.1.3"
   }
 }

@@ -1,6 +1,8 @@
 # react-native-thirdparty-logins
 
-providing alternative ways to login
+Providing alternative ways to login. This will return a token, name and email of the user - use this to either create or validate users.
+
+<p align="center"> <img src="https://github.com/a-b-riecke/react-native-scrollable-timedate-picker/blob/main/buttons.png" /> </p>
 
 ## Installation
 
@@ -61,21 +63,18 @@ Add this google ios client id to plist
 Create an app in facebook business manager and collect the app id.
 
 ### android
-Add this line to ```/app/res/values/strings.xml```
-```
-<string name="facebook_app_id">FACEBOOK_APP_ID</string>
-```
+Follow this guide [meta-guide](https://developers.facebook.com/quickstarts/500494642785818/?platform=android)
 
-Add following lines to in ```/app/manifests/AndroidManifest.xml```
+add these lines in AndroidManifest
 ```
-<uses-permission android:name="android.permission.INTERNET"/>
+ <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+  <meta-data android:name="com.facebook.sdk.AutoInitEnabled" android:value="false"/>
+  <meta-data android:name="com.facebook.sdk.ClientToken" android:value="CLIENT ID" />
+  ```
 
-
-<application android:label="@string/app_name" ...>
-    ...
-    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-    ...
-</application>
+add this in ```MainApplication.java```
+```
+import com.facebook.FacebookSdk;
 ```
 
 ### ios
