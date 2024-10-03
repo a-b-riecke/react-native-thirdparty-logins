@@ -31,6 +31,7 @@ const FacebookLogin = (props: LoginProps) => {
         if (error) {
           props.onError(false);
         } else {
+          console.log('user', user);
           let userObject: UserObject = {
             token: accessToken,
             email: user.email,
@@ -57,6 +58,7 @@ const FacebookLogin = (props: LoginProps) => {
               if (!data) {
                 props.onError(false);
               } else {
+                console.log('fbdata', data);
                 const accessToken = data.accessToken.toString();
                 await getInfoFromToken(accessToken);
               }
