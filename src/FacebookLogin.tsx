@@ -19,12 +19,18 @@ const FacebookLogin = (props: LoginProps) => {
 
   const getInfoFromToken = async (accessToken: string) => {
     const profileRequest = new GraphRequest(
-      '/me?fields=id,name,email',
+      '/me',
       {
         accessToken: accessToken,
+        httpMethod: 'GET',
+        parameters: {
+          fields: 'id,name,email',
+        },
+        version: 'v21.0',
       },
       (error, user: any) => {
         if (error) {
+          console.log('Error fetching data: ', error);
           props.onError(false);
         } else {
           console.log('user', user);
@@ -33,7 +39,6 @@ const FacebookLogin = (props: LoginProps) => {
             email: user.email,
             name: user.name,
           };
-
           props.onSuccess(userObject);
         }
       }
