@@ -18,13 +18,11 @@ const FacebookLogin = (props: LoginProps) => {
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
 
   const getInfoFromToken = async (accessToken: string) => {
-    const PROFILE_REQUEST_PARAMS = {
-      fields: 'id,name,email',
-    };
-
     const profileRequest = new GraphRequest(
-      '/me',
-      { accessToken, parameters: PROFILE_REQUEST_PARAMS },
+      '/me?fields=id,name,email',
+      {
+        accessToken: accessToken,
+      },
       (error, user: any) => {
         if (error) {
           props.onError(false);
@@ -48,6 +46,7 @@ const FacebookLogin = (props: LoginProps) => {
     try {
       LoginManager.logInWithPermissions(['public_profile', 'email']).then(
         (login) => {
+          console.log('login', login);
           if (login.isCancelled) {
             console.log('Login cancelled');
             props.onError(false);
