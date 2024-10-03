@@ -2,7 +2,8 @@
 
 Providing alternative ways to login. This will return a token, name and email of the user - use this to either create or validate users.
 
-<p align="center"> <img src="https://github.com/a-b-riecke/react-native-scrollable-timedate-picker/blob/main/buttons.png" /> </p>
+
+<p align="center"> <img src="[https://github.com/a-b-riecke/react-native-scrollable-timedate-picker/blob/main/buttons.png](https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png)" /> </p>
 
 ## Installation
 
@@ -120,12 +121,44 @@ add this to ```AppDelegate.m```
 
 
 ```js
-import { multiply } from 'react-native-thirdparty-logins';
+import LoginButtons from 'react-native-thirdparty-logins';
 
 // ...
 
-const result = await multiply(3, 7);
+   const handleSucess = (data: {token: string | null, name: string | null, email: string | null}) => {
+      //Returns object when authenticated
+    };
+    const handleError = (data: boolean) => {
+      //data will return false if authentication failed or cancelled
+    };
+
+<LoginButtons
+  onSuccess={handleSucess}
+  onError={handleError}
+  googleIOSClientId={GOOGLE_IOS_CLIENT_ID}
+  googleAndroidClientId={GOOGLE_ANDROID_CLIENT_ID}
+/>
 ```
+
+ onSuccess: (userObject: UserObject) => void;
+  onError: (error: boolean) => void;
+  theme?: 'dark' | 'light';
+  googleEnabled?: boolean;
+  iosEnabled?: boolean;
+  facebookEnabled?: boolean | null;
+  googleIOSClientId: string | null;
+  googleAndroidClientId: string | null;
+
+| Option        | Value        | Required  | Default |
+| ------------- |:-------------:| -----:| -----: |
+|onSuccess     |  (userObject: {token: string, name: string, email: string}) => void;| yes | |
+|onError           |false | yes |  |
+|theme | 'dark' | 'light' | no |  |
+|googleEnabled | boolean | no | true |
+|iosEnabled | boolean | no | true |
+|facebookEnabled | boolean | no | true |
+|googleIOSClientId | string | yes |  |
+|googleAndroidClientId | string | yes | 
 
 
 ## Contributing
