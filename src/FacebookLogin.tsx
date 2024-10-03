@@ -1,6 +1,6 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
-import type { LoginProps } from './types';
+import type { LoginProps, UserObject } from './types';
 import {
   AccessToken,
   GraphRequest,
@@ -20,7 +20,7 @@ const FacebookLogin = (props: LoginProps) => {
   const getInfoFromToken = (accessToken: string) => {
     const PROFILE_REQUEST_PARAMS = {
       fields: {
-        string: 'id,name,first_name,last_name',
+        string: 'id,name,email',
       },
     };
 
@@ -42,9 +42,8 @@ const FacebookLogin = (props: LoginProps) => {
   };
 
   const onFacbookButtonPress = async () => {
-    console.log('Facebook Login');
     try {
-      LoginManager.logInWithPermissions(['public_profile']).then(
+      LoginManager.logInWithPermissions(['public_profile', 'email']).then(
         (login) => {
           if (login.isCancelled) {
             console.log('Login cancelled');
@@ -55,8 +54,15 @@ const FacebookLogin = (props: LoginProps) => {
                 props.onError(false);
               } else {
                 const accessToken = data.accessToken.toString();
-                let user = getInfoFromToken(accessToken);
-                console.log('facebook user:', user);
+                let user: any = getInfoFromToken(accessToken);
+
+                let userObject: UserObject = {
+                  token: accessToken,
+                  email: user.email,
+                  name: user.name,
+                };
+
+                props.onSuccess(userObject);
               }
             });
           }

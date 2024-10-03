@@ -107,30 +107,13 @@ in ```info.plist``` add these values
 add this to ```AppDelegate.m```
 ```
 //  AppDelegate.m
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
 
-- (BOOL)application:(UIApplication *)application 
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
-  // You can skip this line if you have the latest version of the SDK installed
+ //Inside didFinishLaunchingWithOptions, add the following
   [[FBSDKApplicationDelegate sharedInstance] application:application
-    didFinishLaunchingWithOptions:launchOptions];
-  // Add any custom logic here.
-  return YES;
-}
-
-- (BOOL)application:(UIApplication *)application 
-            openURL:(NSURL *)url 
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-
-  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
-    openURL:url
-    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-    annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
-  ];
-  // Add any custom logic here.
-  return handled;
-}
+                       didFinishLaunchingWithOptions:launchOptions];
 ```
 
 
