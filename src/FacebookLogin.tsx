@@ -17,7 +17,7 @@ const FacebookLogin = (props: LoginProps) => {
   const BGCOLOR = theme === 'dark' ? '#0866ff' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
 
-  const getInfoFromToken = (accessToken: string) => {
+  const getInfoFromToken = async (accessToken: string) => {
     const PROFILE_REQUEST_PARAMS = {
       fields: {
         string: 'id,name,email',
@@ -29,10 +29,8 @@ const FacebookLogin = (props: LoginProps) => {
       { accessToken, parameters: PROFILE_REQUEST_PARAMS },
       (error, user) => {
         if (error) {
-          console.log('login info has error: ' + error);
           return false;
         } else {
-          console.log('result:', user);
           return user;
         }
       }
@@ -49,12 +47,17 @@ const FacebookLogin = (props: LoginProps) => {
             console.log('Login cancelled');
             props.onError(false);
           } else {
-            AccessToken.getCurrentAccessToken().then((data) => {
+            AccessToken.getCurrentAccessToken().then(async (data) => {
               if (!data) {
                 props.onError(false);
               } else {
                 const accessToken = data.accessToken.toString();
-                let user: any = getInfoFromToken(accessToken);
+                let user: any = await getInfoFromToken(accessToken);
+
+                if (!user) {
+                  props.onError(false);
+                  return;
+                }
 
                 let userObject: UserObject = {
                   token: accessToken,
