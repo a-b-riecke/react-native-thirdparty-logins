@@ -4,7 +4,7 @@ import { styles } from './styles';
 import type { LoginProps, UserObject } from './types';
 
 const AppleLogin = (props: LoginProps) => {
-  const theme = props.theme || 'light';
+  const theme = props.theme || 'dark';
   const LOGO =
     theme === 'dark'
       ? require('./assets/images/AppleLogoWhite.png')
