@@ -18,9 +18,13 @@ const FacebookLogin = (props: LoginProps) => {
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
 
   const getInfoFromToken = async (accessToken: string) => {
+    const PROFILE_REQUEST_PARAMS = {
+      fields: 'id,name,email',
+    };
+
     const profileRequest = new GraphRequest(
-      '/me?fields=id,name,email',
-      { accessToken },
+      '/me',
+      { accessToken, parameters: PROFILE_REQUEST_PARAMS },
       (error, user: any) => {
         if (error) {
           props.onError(false);
