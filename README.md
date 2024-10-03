@@ -3,7 +3,7 @@
 Providing alternative ways to login. This will return a token, name and email of the user - use this to either create or validate users.
 
 
-<p align="center"> <img src="[[https://github.com/a-b-riecke/react-native-scrollable-timedate-picker/blob/main/buttons.png](https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png)](https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png)" /> </p>
+<p align="center"> <img src="https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png" /> </p>
 
 ## Installation
 
