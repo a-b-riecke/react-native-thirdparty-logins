@@ -27,11 +27,17 @@ const FacebookLogin = (props: LoginProps) => {
     const profileRequest = new GraphRequest(
       '/me',
       { accessToken, parameters: PROFILE_REQUEST_PARAMS },
-      (error, user) => {
+      (error, user: any) => {
         if (error) {
-          return false;
+          props.onError(false);
         } else {
-          return user;
+          let userObject: UserObject = {
+            token: accessToken,
+            email: user.email,
+            name: user.name,
+          };
+
+          props.onSuccess(userObject);
         }
       }
     );
@@ -52,20 +58,7 @@ const FacebookLogin = (props: LoginProps) => {
                 props.onError(false);
               } else {
                 const accessToken = data.accessToken.toString();
-                let user: any = await getInfoFromToken(accessToken);
-
-                if (!user) {
-                  props.onError(false);
-                  return;
-                }
-
-                let userObject: UserObject = {
-                  token: accessToken,
-                  email: user.email,
-                  name: user.name,
-                };
-
-                props.onSuccess(userObject);
+                await getInfoFromToken(accessToken);
               }
             });
           }
