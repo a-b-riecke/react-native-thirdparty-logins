@@ -1,6 +1,6 @@
 import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
-import type { LoginProps } from './types';
+import type { LoginProps, UserObject } from './types';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const GoogleLogin = (props: LoginProps) => {
@@ -41,14 +41,14 @@ const GoogleLogin = (props: LoginProps) => {
       const userInfo = await GoogleSignin.signIn();
 
       if (userInfo.type === 'success') {
-        let userObject = {
+        let userObject: UserObject = {
           token: userInfo.data.idToken,
           email: userInfo.data.user.email,
           name: userInfo.data.user.name,
         };
         props.onSuccess(userObject);
       } else {
-        props.onError('Sign-in Failed');
+        props.onError(false);
       }
     } catch (error) {
       console.log(error);

@@ -1,10 +1,16 @@
-export type LoginProps = {
-  onSuccess: (response: any) => void;
-  onError: (response: any) => void;
-  theme?: 'light' | 'dark';
+export interface UserObject {
+  token: string | null;
+  email: string | null;
+  name: string | null;
+}
+
+export interface LoginProps {
+  onSuccess: (userObject: UserObject) => void;
+  onError: (error: boolean) => void;
+  theme?: 'dark' | 'light';
   googleEnabled?: boolean;
-  facebookEnabled?: boolean;
   iosEnabled?: boolean;
-  googleIOSClientId?: string;
-  googleAndroidClientId?: string;
-};
+  facebookEnabled?: boolean | null;
+  googleIOSClientId: string | null;
+  googleAndroidClientId: string | null;
+}

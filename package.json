@@ -70,6 +70,7 @@
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^29.5.5",
     "@types/react": "^18.3.10",
+    "@types/react-native-fbsdk": "^3.0.6",
     "commitlint": "^17.0.2",
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
@@ -186,6 +187,7 @@
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^2.4.0",
     "@react-native-google-signin/google-signin": "latest",
-    "@types/react-native": "^0.73.0"
+    "@types/react-native": "^0.73.0",
+    "react-native-fbsdk-next": "^13.1.3"
   }
 }

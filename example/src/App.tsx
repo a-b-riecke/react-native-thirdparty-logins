@@ -1,13 +1,14 @@
 import { StyleSheet, View } from 'react-native';
 import LoginButtons from 'react-native-thirdparty-logins';
 import { GOOGLE_ANDROID_CLIENT_ID, GOOGLE_IOS_CLIENT_ID } from './go.config';
+import { UserObject } from '../../src/types';
 
 export default function App() {
-  const handleSucess = (response: any) => {
+  const handleSucess = (response: UserObject) => {
     console.log('Success', response);
   };
 
-  const handleError = (response: any) => {
+  const handleError = (response: boolean) => {
     console.log('Error', response);
   };
 
@@ -16,10 +17,8 @@ export default function App() {
       <LoginButtons
         onSuccess={handleSucess}
         onError={handleError}
-        googleEnabled={true}
         googleIOSClientId={GOOGLE_IOS_CLIENT_ID}
         googleAndroidClientId={GOOGLE_ANDROID_CLIENT_ID}
-        // theme="dark"
       />
     </View>
   );
