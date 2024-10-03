@@ -153,7 +153,7 @@ import LoginButtons from 'react-native-thirdparty-logins';
 | ------------- |:-------------:| -----:| -----: |
 |onSuccess     |  (userObject: {token: string, name: string, email: string}) => void;| yes | |
 |onError           |false | yes |  |
-|theme | 'dark' | 'light' | no |  |
+|theme | 'dark', 'light' | no |  |
 |googleEnabled | boolean | no | true |
 |iosEnabled | boolean | no | true |
 |facebookEnabled | boolean | no | true |
