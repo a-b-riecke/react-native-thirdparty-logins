@@ -1,6 +1,6 @@
 {
   "name": "react-native-thirdparty-logins",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "providing alternative ways to login",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
