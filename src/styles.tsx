@@ -5,14 +5,24 @@ export const styles = StyleSheet.create({
     width: '100%',
     gap: 10,
   },
+  buttonWrapperIcon: {
+    flexDirection: 'row',
+    gap: 10,
+  },
   buttonContainer: {
     borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 5,
     overflow: 'hidden',
     minWidth: 140,
     minHeight: 50,
+  },
+  buttonContainerIcon: {
+    height: 50,
+    width: 50,
+    alignItems: 'center',
+    overflow: 'hidden',
+    borderWidth: 1,
   },
   logo: {
     width: 50,

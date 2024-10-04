@@ -43,6 +43,9 @@ dependencies {
 Use the webapplication id for android when passing the key
 
 
+
+
+
 ### ios
 Add this google ios client id to plist
 ```
@@ -77,6 +80,13 @@ add these lines in AndroidManifest
 add this in ```MainApplication.java```
 ```
 import com.facebook.FacebookSdk;
+
+
+
+public void onCreate() {
+    super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
+```
 ```
 
 ### ios
@@ -140,15 +150,7 @@ import LoginButtons from 'react-native-thirdparty-logins';
   googleAndroidClientId={GOOGLE_ANDROID_CLIENT_ID}
 />
 ```
-
- onSuccess: (userObject: UserObject) => void;
-  onError: (error: boolean) => void;
-  theme?: 'dark' | 'light';
-  googleEnabled?: boolean;
-  iosEnabled?: boolean;
-  facebookEnabled?: boolean | null;
-  googleIOSClientId: string | null;
-  googleAndroidClientId: string | null;
+ ## Options
 
 | Option        | Value        | Required  | Default |
 | ------------- |:-------------:| -----:| -----: |
@@ -159,7 +161,9 @@ import LoginButtons from 'react-native-thirdparty-logins';
 |iosEnabled | boolean | no | true |
 |facebookEnabled | boolean | no | true |
 |googleIOSClientId | string | yes |  |
-|googleAndroidClientId | string | yes | 
+|googleAndroidClientId | string | yes |  |
+|iconOnly | boolean | no |false |
+|borderRadius | number | no | 0 |
 
 
 ## Contributing

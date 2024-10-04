@@ -4,6 +4,7 @@ import { styles } from './styles';
 import type { LoginProps, UserObject } from './types';
 
 const AppleLogin = (props: LoginProps) => {
+  const iconOnly = props.iconOnly || false;
   const theme = props.theme || 'dark';
   const LOGO =
     theme === 'dark'
@@ -11,6 +12,7 @@ const AppleLogin = (props: LoginProps) => {
       : require('./assets/images/AppleLogoBlack.png');
   const BGCOLOR = theme === 'dark' ? 'black' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
+  const BORDERRADIUS = props.borderRadius ?? 0;
 
   const onAppleButtonPress = async () => {
     try {
@@ -38,33 +40,24 @@ const AppleLogin = (props: LoginProps) => {
     }
   };
 
-  if (!appleAuth.isSupported) {
-    return (
-      <View
-        style={[
-          { backgroundColor: BGCOLOR, borderColor: TXTCOLOR },
-          styles.buttonContainer,
-        ]}
-      >
-        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
-          Sign in with Apple not supported
-        </Text>
-      </View>
-    );
-  }
-
   return (
     <TouchableOpacity onPress={onAppleButtonPress}>
       <View
         style={[
-          { backgroundColor: BGCOLOR, borderColor: TXTCOLOR },
-          styles.buttonContainer,
+          {
+            backgroundColor: BGCOLOR,
+            borderColor: TXTCOLOR,
+            borderRadius: BORDERRADIUS,
+          },
+          iconOnly ? styles.buttonContainerIcon : styles.buttonContainer,
         ]}
       >
         <Image style={styles.logo} source={LOGO} />
-        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
-          Sign in with Apple
-        </Text>
+        {iconOnly && (
+          <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
+            Sign in with Apple
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

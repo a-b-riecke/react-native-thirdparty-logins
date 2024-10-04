@@ -13,4 +13,6 @@ export interface LoginProps {
   facebookEnabled?: boolean | null;
   googleIOSClientId: string | null;
   googleAndroidClientId: string | null;
+  iconOnly?: boolean;
+  borderRadius?: number;
 }

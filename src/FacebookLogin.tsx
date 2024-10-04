@@ -9,6 +9,7 @@ import {
 } from 'react-native-fbsdk-next';
 
 const FacebookLogin = (props: LoginProps) => {
+  const iconOnly = props.iconOnly || false;
   const theme = props.theme || 'dark';
   const LOGO =
     theme === 'dark'
@@ -16,6 +17,7 @@ const FacebookLogin = (props: LoginProps) => {
       : require('./assets/images/FacebookLogoBlue.png');
   const BGCOLOR = theme === 'dark' ? '#0866ff' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
+  const BORDERRADIUS = props.borderRadius ?? 0;
 
   const getInfoFromToken = async (accessToken: string) => {
     try {
@@ -53,16 +55,13 @@ const FacebookLogin = (props: LoginProps) => {
     try {
       LoginManager.logInWithPermissions(['public_profile', 'email']).then(
         (login) => {
-          console.log('login', login);
           if (login.isCancelled) {
-            console.log('Login cancelled');
             props.onError(false);
           } else {
             AccessToken.getCurrentAccessToken().then(async (data) => {
               if (!data) {
                 props.onError(false);
               } else {
-                console.log('fbdata', data);
                 const accessToken = data.accessToken.toString();
                 await getInfoFromToken(accessToken);
               }
@@ -83,14 +82,20 @@ const FacebookLogin = (props: LoginProps) => {
     <TouchableOpacity onPress={onFacbookButtonPress}>
       <View
         style={[
-          { backgroundColor: BGCOLOR, borderColor: TXTCOLOR },
-          styles.buttonContainer,
+          {
+            backgroundColor: BGCOLOR,
+            borderColor: TXTCOLOR,
+            borderRadius: BORDERRADIUS,
+          },
+          iconOnly ? styles.buttonContainerIcon : styles.buttonContainer,
         ]}
       >
         <Image style={styles.logo} source={LOGO} />
-        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
-          Login with Facebook
-        </Text>
+        {iconOnly && (
+          <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
+            Login with Facebook
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

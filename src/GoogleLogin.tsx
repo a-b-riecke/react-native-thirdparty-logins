@@ -4,10 +4,12 @@ import type { LoginProps, UserObject } from './types';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const GoogleLogin = (props: LoginProps) => {
+  const iconOnly = props.iconOnly || false;
   const theme = props.theme || 'light';
   const LOGO = require('./assets/images/GoogleLogo.png');
   const BGCOLOR = theme === 'dark' ? 'black' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
+  const BORDERRADIUS = props.borderRadius ?? 0;
 
   const key =
     Platform.OS === 'ios'
@@ -59,14 +61,20 @@ const GoogleLogin = (props: LoginProps) => {
     <TouchableOpacity onPress={onGoogleButtonPress}>
       <View
         style={[
-          { backgroundColor: BGCOLOR, borderColor: TXTCOLOR },
-          styles.buttonContainer,
+          {
+            backgroundColor: BGCOLOR,
+            borderColor: TXTCOLOR,
+            borderRadius: BORDERRADIUS,
+          },
+          iconOnly ? styles.buttonContainerIcon : styles.buttonContainer,
         ]}
       >
         <Image style={styles.logo} source={LOGO} />
-        <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
-          Sign in with Google
-        </Text>
+        {iconOnly && (
+          <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
+            Sign in with Google
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );

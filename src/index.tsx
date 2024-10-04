@@ -6,8 +6,10 @@ import { styles } from './styles';
 import type { LoginProps } from './types';
 
 const LoginButtons = (props: LoginProps) => {
+  const iconOnly = props.iconOnly || false;
+
   return (
-    <View style={styles.buttonWrapper}>
+    <View style={iconOnly ? styles.buttonWrapperIcon : styles.buttonWrapper}>
       {Platform.OS === 'ios' && props.iosEnabled !== false && (
         <AppleLogin {...props} />
       )}
