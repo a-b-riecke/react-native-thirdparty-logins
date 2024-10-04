@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   buttonWrapperIcon: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 20,
   },
   buttonContainer: {
     borderWidth: 1,
