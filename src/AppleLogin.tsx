@@ -20,7 +20,6 @@ const AppleLogin = (props: LoginProps) => {
       });
 
       if (appleAuthRequestResponse.identityToken) {
-        console.log('apple response', appleAuthRequestResponse);
         const userObject: UserObject = {
           token: appleAuthRequestResponse.identityToken,
           email: appleAuthRequestResponse.email,

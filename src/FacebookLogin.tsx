@@ -34,7 +34,6 @@ const FacebookLogin = (props: LoginProps) => {
             console.log('Error fetching data: ', error);
             props.onError(false);
           } else {
-            console.log('user', user);
             let userObject: UserObject = {
               token: accessToken,
               email: user.email,

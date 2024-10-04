@@ -53,23 +53,6 @@ const GoogleLogin = (props: LoginProps) => {
     } catch (error) {
       console.log(error);
     }
-    //   try {
-    //     const appleAuthRequestResponse = await appleAuth.performRequest({
-    //       requestedOperation: appleAuth.Operation.LOGIN,
-    //       requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    //     });
-
-    //     // const { user, email, fullName, identityToken } = appleAuthRequestResponse;
-
-    //     if (appleAuthRequestResponse.identityToken) {
-    //       props.onSuccess(appleAuthRequestResponse)
-    //     } else {
-    //       props.onError('Sign-in Failed')
-    //     }
-
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
   };
 
   return (
