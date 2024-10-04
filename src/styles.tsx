@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     gap: 20,
   },
   buttonContainer: {
-    borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'hidden',
@@ -22,7 +21,6 @@ export const styles = StyleSheet.create({
     width: 50,
     alignItems: 'center',
     overflow: 'hidden',
-    borderWidth: 1,
   },
   logo: {
     width: 50,
