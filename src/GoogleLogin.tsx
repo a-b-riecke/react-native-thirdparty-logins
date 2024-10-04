@@ -11,7 +11,7 @@ const GoogleLogin = (props: LoginProps) => {
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
   const BORDERRADIUS = props.borderRadius ?? 0;
   const BORDERCOLOR = props.borderColor ?? TXTCOLOR;
-  const BORDERENABLED = props.borderEnabled ?? true;
+  const BORDERENABLED = props.borderEnabled === false ? false : true;
   const BORDERWIDTH = props.borderEnabled ? 1 : 0;
 
   const key =
