@@ -91,7 +91,7 @@ const FacebookLogin = (props: LoginProps) => {
         ]}
       >
         <Image style={styles.logo} source={LOGO} />
-        {iconOnly && (
+        {!iconOnly && (
           <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
             Login with Facebook
           </Text>

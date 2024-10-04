@@ -53,7 +53,7 @@ const AppleLogin = (props: LoginProps) => {
         ]}
       >
         <Image style={styles.logo} source={LOGO} />
-        {iconOnly && (
+        {!iconOnly && (
           <Text style={[{ color: TXTCOLOR }, styles.buttonText]}>
             Sign in with Apple
           </Text>
