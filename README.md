@@ -164,7 +164,8 @@ import LoginButtons from 'react-native-thirdparty-logins';
 |googleAndroidClientId | string | yes |  |
 |iconOnly | boolean | no |false |
 |borderRadius | number | no | 0 |
-
+|borderColor | string | no | none |
+|borderEnabled | boolean | no | true |
 
 ## Contributing
 

@@ -15,4 +15,6 @@ export interface LoginProps {
   googleAndroidClientId: string | null;
   iconOnly?: boolean;
   borderRadius?: number;
+  borderColor?: string;
+  borderEnabled?: boolean;
 }

@@ -18,6 +18,8 @@ const FacebookLogin = (props: LoginProps) => {
   const BGCOLOR = theme === 'dark' ? '#0866ff' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
   const BORDERRADIUS = props.borderRadius ?? 0;
+  const BORDERCOLOR = props.borderColor ?? TXTCOLOR;
+  const BORDERENABLED = props.borderEnabled ?? true;
 
   const getInfoFromToken = async (accessToken: string) => {
     try {
@@ -84,8 +86,10 @@ const FacebookLogin = (props: LoginProps) => {
         style={[
           {
             backgroundColor: BGCOLOR,
-            borderColor: TXTCOLOR,
             borderRadius: BORDERRADIUS,
+          },
+          BORDERENABLED && {
+            borderColor: BORDERCOLOR,
           },
           iconOnly ? styles.buttonContainerIcon : styles.buttonContainer,
         ]}

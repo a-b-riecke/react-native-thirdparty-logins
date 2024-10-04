@@ -13,6 +13,8 @@ const AppleLogin = (props: LoginProps) => {
   const BGCOLOR = theme === 'dark' ? 'black' : 'white';
   const TXTCOLOR = theme === 'dark' ? 'white' : 'black';
   const BORDERRADIUS = props.borderRadius ?? 0;
+  const BORDERCOLOR = props.borderColor ?? TXTCOLOR;
+  const BORDERENABLED = props.borderEnabled ?? true;
 
   const onAppleButtonPress = async () => {
     try {
@@ -46,8 +48,10 @@ const AppleLogin = (props: LoginProps) => {
         style={[
           {
             backgroundColor: BGCOLOR,
-            borderColor: TXTCOLOR,
             borderRadius: BORDERRADIUS,
+          },
+          BORDERENABLED && {
+            borderColor: BORDERCOLOR,
           },
           iconOnly ? styles.buttonContainerIcon : styles.buttonContainer,
         ]}
