@@ -23,13 +23,11 @@ const FacebookLogin = (props: LoginProps) => {
         '/me',
         {
           accessToken: accessToken,
-          httpMethod: 'GET',
           parameters: {
             fields: {
               string: 'id,name,email',
             },
           },
-          version: 'v21.0',
         },
         (error, user: any) => {
           if (error) {
