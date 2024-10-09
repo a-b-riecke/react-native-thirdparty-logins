@@ -32,6 +32,7 @@ const AppleLogin = (props: LoginProps) => {
             appleAuthRequestResponse.fullName?.givenName +
             ' ' +
             appleAuthRequestResponse.fullName?.familyName,
+          provider: 'facebook',
         };
         props.onSuccess(userObject);
       } else {

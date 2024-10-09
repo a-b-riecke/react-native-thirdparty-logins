@@ -2,6 +2,7 @@ export interface UserObject {
   token: string | null;
   email: string | null;
   name: string | null;
+  provider: 'google' | 'facebook' | 'apple';
 }
 
 export interface LoginProps {

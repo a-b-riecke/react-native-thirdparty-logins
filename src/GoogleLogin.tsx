@@ -50,6 +50,7 @@ const GoogleLogin = (props: LoginProps) => {
           token: userInfo.data.idToken,
           email: userInfo.data.user.email,
           name: userInfo.data.user.name,
+          provider: 'google',
         };
         props.onSuccess(userObject);
       } else {

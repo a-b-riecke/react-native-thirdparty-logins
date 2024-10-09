@@ -43,6 +43,7 @@ const FacebookLogin = (props: LoginProps) => {
               token: accessToken,
               email: user.email,
               name: user.name,
+              provider: 'facebook',
             };
             props.onSuccess(userObject);
           }
