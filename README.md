@@ -2,6 +2,8 @@
 
 Providing alternative ways to login. This will return a token, name and email of the user - use this to either create or validate users.
 
+Google and Apple will return a jwt token where the value sub is the unique identifier where facebook will return an access token that can be used on graph ql to fetch the information where the unique identifier is id. 
+
 
 <p align="center"> <img src="https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png" /> </p>
 
@@ -16,7 +18,7 @@ yarn add react-native-thirdparty-logins
 
 ## Apple api setup
 Remember to add "Sign in with apple" as a capability in the app.
-Email and name will only be returned on the first request - sequently request will only return a token
+Email and name will only be returned on the first request - sequently request will only return a token.
 
 ## Google api setup
  Set the keys up in [Google Cloud](https://peerlist.io/blog/engineering/implementing-google-signin-in-react-native#10-possible-problem-developer_error)
