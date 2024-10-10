@@ -37,8 +37,7 @@ const FacebookLogin = (props: LoginProps) => {
         },
         (error, user: any) => {
           if (error) {
-            console.log('Error fetching data: ', error);
-            props.onError(false);
+            return false;
           } else {
             let userObject: UserObject = {
               token: accessToken,
@@ -46,8 +45,8 @@ const FacebookLogin = (props: LoginProps) => {
               name: user.name,
               provider: 'facebook',
             };
-            console.log('facebook', user);
-            props.onSuccess(userObject);
+
+            return userObject;
           }
         }
       );
@@ -58,57 +57,32 @@ const FacebookLogin = (props: LoginProps) => {
   };
 
   const onFacbookButtonPress = async () => {
-    // try {
-    //   LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-    //     async (login) => {
-    //       if (login.isCancelled) {
-    //         props.onError(false);
-    //       } else {
-    //         if (Platform.OS === 'ios') {
-    //           AuthenticationToken.getAuthenticationTokenIOS().then((result) => {
-    //             console.log('authenticationToken', result);
-    //           });
-    //           //   console.log('result', result);
-    //         }
-    //         const result = await AccessToken.getCurrentAccessToken();
-    //         if (result) {
-    //           const accessToken = result.accessToken.toString();
-    //           getInfoFromToken(accessToken);
-    //         } else {
-    //           props.onError(false);
-    //         }
-    //         // }
-    //       }
-    //     },
-    //     (error) => {
-    //       props.onError(false);
-    //       console.log('Login fail with error: ' + error);
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.error(error);
-    // }
     try {
-      const result = await LoginManager.logInWithPermissions(
-        ['public_profile', 'email'],
-        'limited',
-        'my_nonce' // Optional
-      );
-      console.log(result);
+      await LoginManager.logInWithPermissions(['public_profile', 'email']);
+      const accesTokenResponse = await AccessToken.getCurrentAccessToken();
+      let userInfo: any = false;
+      if (accesTokenResponse?.accessToken) {
+        userInfo = await getInfoFromToken(accesTokenResponse?.accessToken);
+      }
+
       if (Platform.OS === 'ios') {
+        await LoginManager.logInWithPermissions(
+          ['public_profile', 'email'],
+          'limited'
+        );
         // This token **cannot** be used to access the Graph API.
         // https://developers.facebook.com/docs/facebook-login/limited-login/
         const authTokenResponse =
           await AuthenticationToken.getAuthenticationTokenIOS();
-        console.log(authTokenResponse?.authenticationToken);
-      } else {
-        // This token can be used to access the Graph API.
-        const accesTokenResponse = await AccessToken.getCurrentAccessToken();
-        console.log(accesTokenResponse?.accessToken);
-        if (accesTokenResponse?.accessToken) {
-          getInfoFromToken(accesTokenResponse?.accessToken);
+
+        if (authTokenResponse?.authenticationToken) {
+          userInfo.token = authTokenResponse?.authenticationToken;
         }
       }
+      if (!userInfo) {
+        props.onError(false);
+      }
+      props.onSuccess(userInfo);
     } catch (error) {
       console.log(error);
     }
