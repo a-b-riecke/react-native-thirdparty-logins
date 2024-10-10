@@ -8,6 +8,7 @@ import {
   GraphRequestManager,
   LoginManager,
 } from 'react-native-fbsdk-next';
+import { jwtDecode } from 'jwt-decode';
 
 const FacebookLogin = (props: LoginProps) => {
   const iconOnly = props.iconOnly || false;
@@ -22,6 +23,20 @@ const FacebookLogin = (props: LoginProps) => {
   const BORDERCOLOR = props.borderColor ?? TXTCOLOR;
   const BORDERENABLED = props.borderEnabled === false ? false : true;
   const BORDERWIDTH = props.borderEnabled ? 1 : 0;
+
+  const getInfoFromJwtToken = (authToken: string) => {
+    const decodedToken: any = jwtDecode(authToken);
+    console.log(decodedToken);
+
+    let userObject: UserObject = {
+      token: authToken,
+      email: decodedToken?.email,
+      name: decodedToken?.name,
+      provider: 'facebook',
+    };
+
+    props.onSuccess(userObject);
+  };
 
   const getInfoFromToken = async (accessToken: string) => {
     try {
@@ -67,14 +82,11 @@ const FacebookLogin = (props: LoginProps) => {
         const authTokenResponse =
           await AuthenticationToken.getAuthenticationTokenIOS();
 
-        let userObject: UserObject = {
-          token: authTokenResponse?.authenticationToken ?? '',
-          email: null,
-          name: null,
-          provider: 'facebook',
-        };
-
-        props.onSuccess(userObject);
+        if (authTokenResponse?.authenticationToken) {
+          getInfoFromJwtToken(authTokenResponse?.authenticationToken);
+        } else {
+          props.onError(false);
+        }
       } else {
         await LoginManager.logInWithPermissions(['public_profile', 'email']);
         const accesTokenResponse = await AccessToken.getCurrentAccessToken();
@@ -86,6 +98,7 @@ const FacebookLogin = (props: LoginProps) => {
       }
     } catch (error) {
       console.log(error);
+      props.onError(false);
     }
   };
 
