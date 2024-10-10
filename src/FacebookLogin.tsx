@@ -59,10 +59,7 @@ const FacebookLogin = (props: LoginProps) => {
 
   const onFacbookButtonPress = async () => {
     try {
-      LoginManager.logInWithPermissions(
-        ['public_profile', 'email'],
-        'limited'
-      ).then(
+      LoginManager.logInWithPermissions(['public_profile', 'email']).then(
         async (login) => {
           if (login.isCancelled) {
             props.onError(false);
