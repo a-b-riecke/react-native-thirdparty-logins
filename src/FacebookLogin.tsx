@@ -37,7 +37,7 @@ const FacebookLogin = (props: LoginProps) => {
         },
         (error, user: any) => {
           if (error) {
-            return false;
+            props.onError(false);
           } else {
             let userObject: UserObject = {
               token: accessToken,
@@ -46,7 +46,7 @@ const FacebookLogin = (props: LoginProps) => {
               provider: 'facebook',
             };
 
-            return userObject;
+            props.onSuccess(userObject);
           }
         }
       );
@@ -58,31 +58,32 @@ const FacebookLogin = (props: LoginProps) => {
 
   const onFacbookButtonPress = async () => {
     try {
-      await LoginManager.logInWithPermissions(['public_profile', 'email']);
-      const accesTokenResponse = await AccessToken.getCurrentAccessToken();
-      let userInfo: any = false;
-      if (accesTokenResponse?.accessToken) {
-        userInfo = await getInfoFromToken(accesTokenResponse?.accessToken);
-      }
-
       if (Platform.OS === 'ios') {
         await LoginManager.logInWithPermissions(
           ['public_profile', 'email'],
           'limited'
         );
-        // This token **cannot** be used to access the Graph API.
-        // https://developers.facebook.com/docs/facebook-login/limited-login/
+
         const authTokenResponse =
           await AuthenticationToken.getAuthenticationTokenIOS();
 
-        if (authTokenResponse?.authenticationToken) {
-          userInfo.token = authTokenResponse?.authenticationToken;
+        let userObject: UserObject = {
+          token: authTokenResponse?.authenticationToken ?? '',
+          email: null,
+          name: null,
+          provider: 'facebook',
+        };
+
+        props.onSuccess(userObject);
+      } else {
+        await LoginManager.logInWithPermissions(['public_profile', 'email']);
+        const accesTokenResponse = await AccessToken.getCurrentAccessToken();
+        if (accesTokenResponse?.accessToken) {
+          getInfoFromToken(accesTokenResponse?.accessToken);
+        } else {
+          props.onError(false);
         }
       }
-      if (!userInfo) {
-        props.onError(false);
-      }
-      props.onSuccess(userInfo);
     } catch (error) {
       console.log(error);
     }
