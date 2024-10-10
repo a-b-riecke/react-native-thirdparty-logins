@@ -23,7 +23,7 @@ const FacebookLogin = (props: LoginProps) => {
   const BORDERENABLED = props.borderEnabled === false ? false : true;
   const BORDERWIDTH = props.borderEnabled ? 1 : 0;
 
-  const getInfoFromToken = async (accessToken: string) => {
+  const getInfoFromToken = async (accessToken: string, iosToken: string) => {
     try {
       const profileRequest = new GraphRequest(
         '/me',
@@ -41,12 +41,11 @@ const FacebookLogin = (props: LoginProps) => {
             props.onError(false);
           } else {
             let userObject: UserObject = {
-              token: accessToken,
+              token: iosToken !== '' ? iosToken : accessToken,
               email: user.email,
               name: user.name,
               provider: 'facebook',
             };
-            console.log('facebook', user);
             props.onSuccess(userObject);
           }
         }
@@ -58,56 +57,22 @@ const FacebookLogin = (props: LoginProps) => {
   };
 
   const onFacbookButtonPress = async () => {
-    // try {
-    //   LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-    //     async (login) => {
-    //       if (login.isCancelled) {
-    //         props.onError(false);
-    //       } else {
-    //         if (Platform.OS === 'ios') {
-    //           AuthenticationToken.getAuthenticationTokenIOS().then((result) => {
-    //             console.log('authenticationToken', result);
-    //           });
-    //           //   console.log('result', result);
-    //         }
-    //         const result = await AccessToken.getCurrentAccessToken();
-    //         if (result) {
-    //           const accessToken = result.accessToken.toString();
-    //           getInfoFromToken(accessToken);
-    //         } else {
-    //           props.onError(false);
-    //         }
-    //         // }
-    //       }
-    //     },
-    //     (error) => {
-    //       props.onError(false);
-    //       console.log('Login fail with error: ' + error);
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.error(error);
-    // }
     try {
-      const result = await LoginManager.logInWithPermissions(
+      await LoginManager.logInWithPermissions(
         ['public_profile', 'email'],
-        'limited',
-        'my_nonce' // Optional
+        'limited'
       );
-      console.log(result);
+
+      let iosToken = '';
       if (Platform.OS === 'ios') {
-        // This token **cannot** be used to access the Graph API.
-        // https://developers.facebook.com/docs/facebook-login/limited-login/
         const authTokenResponse =
           await AuthenticationToken.getAuthenticationTokenIOS();
-        console.log(authTokenResponse?.authenticationToken);
-      } else {
-        // This token can be used to access the Graph API.
-        const accesTokenResponse = await AccessToken.getCurrentAccessToken();
-        console.log(accesTokenResponse?.accessToken);
-        if (accesTokenResponse?.accessToken) {
-          getInfoFromToken(accesTokenResponse?.accessToken);
-        }
+        iosToken = authTokenResponse?.authenticationToken ?? '';
+      }
+
+      const accesTokenResponse = await AccessToken.getCurrentAccessToken();
+      if (accesTokenResponse?.accessToken) {
+        getInfoFromToken(accesTokenResponse?.accessToken, iosToken);
       }
     } catch (error) {
       console.log(error);
