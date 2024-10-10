@@ -24,8 +24,6 @@ const AppleLogin = (props: LoginProps) => {
         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
       });
 
-      console.log(appleAuthRequestResponse);
-
       if (appleAuthRequestResponse.identityToken) {
         const userObject: UserObject = {
           token: appleAuthRequestResponse.authorizationCode,
