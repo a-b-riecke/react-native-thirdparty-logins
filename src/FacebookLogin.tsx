@@ -45,6 +45,7 @@ const FacebookLogin = (props: LoginProps) => {
               name: user.name,
               provider: 'facebook',
             };
+            console.log('facebook', user);
             props.onSuccess(userObject);
           }
         }

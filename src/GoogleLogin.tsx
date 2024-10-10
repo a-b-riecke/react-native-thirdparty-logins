@@ -52,6 +52,9 @@ const GoogleLogin = (props: LoginProps) => {
           name: userInfo.data.user.name,
           provider: 'google',
         };
+
+        console.log('google', userInfo);
+
         props.onSuccess(userObject);
       } else {
         props.onError(false);

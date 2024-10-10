@@ -34,6 +34,8 @@ const AppleLogin = (props: LoginProps) => {
             appleAuthRequestResponse.fullName?.familyName,
           provider: 'apple',
         };
+
+        console.log('apple', appleAuthRequestResponse);
         props.onSuccess(userObject);
       } else {
         props.onError(false);
