@@ -2,7 +2,8 @@
 
 Providing alternative ways to login. This will return a token, name and email of the user - use this to either create or validate users.
 
-Google and Apple will return a jwt token where the value sub is the unique identifier where facebook will return an access token that can be used on graph ql to fetch the information where the unique identifier is id. 
+The tokens received from approval should then be used by the backend to verify the user from the backend
+
 
 
 <p align="center"> <img src="https://github.com/a-b-riecke/react-native-thirdparty-logins/blob/main/example/assets/ButtonExamples.png" /> </p>

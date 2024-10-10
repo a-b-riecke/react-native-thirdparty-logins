@@ -48,14 +48,11 @@ const GoogleLogin = (props: LoginProps) => {
 
       if (userInfo.type === 'success') {
         let userObject: UserObject = {
-          token: userInfo.data.idToken,
+          token: tokens.accessToken,
           email: userInfo.data.user.email,
           name: userInfo.data.user.name,
           provider: 'google',
         };
-
-        console.log('google', userInfo);
-        console.log('tokens', tokens);
 
         props.onSuccess(userObject);
       } else {

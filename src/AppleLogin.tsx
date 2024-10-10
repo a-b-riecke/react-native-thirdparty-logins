@@ -26,7 +26,7 @@ const AppleLogin = (props: LoginProps) => {
 
       if (appleAuthRequestResponse.identityToken) {
         const userObject: UserObject = {
-          token: appleAuthRequestResponse.identityToken,
+          token: appleAuthRequestResponse.authorizationCode,
           email: appleAuthRequestResponse.email,
           name:
             appleAuthRequestResponse.fullName?.givenName +
@@ -35,7 +35,6 @@ const AppleLogin = (props: LoginProps) => {
           provider: 'apple',
         };
 
-        console.log('apple', appleAuthRequestResponse);
         props.onSuccess(userObject);
       } else {
         props.onError(false);
