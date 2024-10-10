@@ -8,7 +8,29 @@ import {
   GraphRequestManager,
   LoginManager,
 } from 'react-native-fbsdk-next';
-import { jwtDecode } from 'jwt-decode';
+import { Buffer } from 'buffer';
+
+const decodeJWT = (token: string) => {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      throw new Error('Invalid token format');
+    }
+
+    // Decode the payload (second part)
+    const payload = parts[1];
+    if (!payload) {
+      throw new Error('Token missing payload');
+    }
+    const paddedPayload = payload + '='.repeat((4 - (payload.length % 4)) % 4);
+    const decoded = Buffer.from(paddedPayload, 'base64').toString('utf8');
+
+    return JSON.parse(decoded);
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+};
 
 const FacebookLogin = (props: LoginProps) => {
   const iconOnly = props.iconOnly || false;
@@ -25,7 +47,7 @@ const FacebookLogin = (props: LoginProps) => {
   const BORDERWIDTH = props.borderEnabled ? 1 : 0;
 
   const getInfoFromJwtToken = (authToken: string) => {
-    const decodedToken: any = jwtDecode(authToken);
+    const decodedToken: any = decodeJWT(authToken);
     console.log(decodedToken);
 
     let userObject: UserObject = {
