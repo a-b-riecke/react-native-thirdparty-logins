@@ -67,6 +67,15 @@ const FacebookLogin = (props: LoginProps) => {
               if (!data) {
                 props.onError(false);
               } else {
+                console.log('facebook token', data);
+                console.log('Token Details:', {
+                  appId: data.applicationID,
+                  userId: data.userID,
+                  expires: new Date(data.expirationTime),
+                  permissions: data.permissions,
+                  // Don't log full token in production
+                  tokenPreview: `${data.accessToken}...`,
+                });
                 const accessToken = data.accessToken.toString();
                 await getInfoFromToken(accessToken);
               }
