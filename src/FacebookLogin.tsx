@@ -65,18 +65,19 @@ const FacebookLogin = (props: LoginProps) => {
             props.onError(false);
           } else {
             if (Platform.OS === 'ios') {
-              const result =
-                await AuthenticationToken.getAuthenticationTokenIOS();
-              console.log('result', result);
-            } else {
-              const result = await AccessToken.getCurrentAccessToken();
-              if (result) {
-                const accessToken = result.accessToken.toString();
-                getInfoFromToken(accessToken);
-              } else {
-                props.onError(false);
-              }
+              AuthenticationToken.getAuthenticationTokenIOS().then((result) => {
+                console.log('authenticationToken', result);
+              });
+              //   console.log('result', result);
             }
+            const result = await AccessToken.getCurrentAccessToken();
+            if (result) {
+              const accessToken = result.accessToken.toString();
+              getInfoFromToken(accessToken);
+            } else {
+              props.onError(false);
+            }
+            // }
           }
         },
         (error) => {
