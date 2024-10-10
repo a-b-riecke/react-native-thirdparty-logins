@@ -63,33 +63,22 @@ const FacebookLogin = (props: LoginProps) => {
         ['public_profile', 'email'],
         'limited'
       ).then(
-        (login) => {
+        async (login) => {
           if (login.isCancelled) {
             props.onError(false);
           } else {
             if (Platform.OS === 'ios') {
-              AuthenticationToken.getAuthenticationTokenIOS().then(
-                async (data) => {
-                  console.log('data', data);
-                  if (!data) {
-                    props.onError(false);
-                  } else {
-                    console.log(data.authenticationToken.toString());
-                    const accessToken = data.authenticationToken.toString();
-                    await getInfoFromToken(accessToken);
-                  }
-                }
-              );
+              const result =
+                await AuthenticationToken.getAuthenticationTokenIOS();
+              console.log('result', result);
             } else {
-              AccessToken.getCurrentAccessToken().then(async (data) => {
-                if (!data) {
-                  props.onError(false);
-                } else {
-                  console.log(data.accessToken.toString());
-                  const accessToken = data.accessToken.toString();
-                  await getInfoFromToken(accessToken);
-                }
-              });
+              const result = await AccessToken.getCurrentAccessToken();
+              if (result) {
+                const accessToken = result.accessToken.toString();
+                getInfoFromToken(accessToken);
+              } else {
+                props.onError(false);
+              }
             }
           }
         },
