@@ -44,6 +44,7 @@ const GoogleLogin = (props: LoginProps) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      const tokens = await GoogleSignin.getTokens();
 
       if (userInfo.type === 'success') {
         let userObject: UserObject = {
@@ -54,6 +55,7 @@ const GoogleLogin = (props: LoginProps) => {
         };
 
         console.log('google', userInfo);
+        console.log('tokens', tokens);
 
         props.onSuccess(userObject);
       } else {
