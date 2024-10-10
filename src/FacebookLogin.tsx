@@ -1,8 +1,9 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import type { LoginProps, UserObject } from './types';
 import {
   AccessToken,
+  AuthenticationToken,
   GraphRequest,
   GraphRequestManager,
   LoginManager,
@@ -66,15 +67,30 @@ const FacebookLogin = (props: LoginProps) => {
           if (login.isCancelled) {
             props.onError(false);
           } else {
-            AccessToken.getCurrentAccessToken().then(async (data) => {
-              if (!data) {
-                props.onError(false);
-              } else {
-                console.log(data.accessToken.toString());
-                const accessToken = data.accessToken.toString();
-                await getInfoFromToken(accessToken);
-              }
-            });
+            if (Platform.OS === 'ios') {
+              AuthenticationToken.getAuthenticationTokenIOS().then(
+                async (data) => {
+                  console.log('data', data);
+                  if (!data) {
+                    props.onError(false);
+                  } else {
+                    console.log(data.authenticationToken.toString());
+                    const accessToken = data.authenticationToken.toString();
+                    await getInfoFromToken(accessToken);
+                  }
+                }
+              );
+            } else {
+              AccessToken.getCurrentAccessToken().then(async (data) => {
+                if (!data) {
+                  props.onError(false);
+                } else {
+                  console.log(data.accessToken.toString());
+                  const accessToken = data.accessToken.toString();
+                  await getInfoFromToken(accessToken);
+                }
+              });
+            }
           }
         },
         (error) => {
