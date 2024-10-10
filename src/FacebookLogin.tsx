@@ -27,7 +27,7 @@ const FacebookLogin = (props: LoginProps) => {
       const profileRequest = new GraphRequest(
         '/me',
         {
-          accessToken: accessToken,
+          accessToken: accessToken.toString(),
           parameters: {
             fields: {
               string: 'id,name,email',
@@ -58,7 +58,10 @@ const FacebookLogin = (props: LoginProps) => {
 
   const onFacbookButtonPress = async () => {
     try {
-      LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      LoginManager.logInWithPermissions(
+        ['public_profile', 'email'],
+        'limited'
+      ).then(
         (login) => {
           if (login.isCancelled) {
             props.onError(false);
@@ -67,15 +70,7 @@ const FacebookLogin = (props: LoginProps) => {
               if (!data) {
                 props.onError(false);
               } else {
-                console.log('facebook token', data);
-                console.log('Token Details:', {
-                  appId: data.applicationID,
-                  userId: data.userID,
-                  expires: new Date(data.expirationTime),
-                  permissions: data.permissions,
-                  // Don't log full token in production
-                  tokenPreview: `${data.accessToken}...`,
-                });
+                console.log(data.accessToken.toString());
                 const accessToken = data.accessToken.toString();
                 await getInfoFromToken(accessToken);
               }
